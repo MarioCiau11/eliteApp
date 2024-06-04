@@ -2,6 +2,7 @@
   "name": "tailadmin-react-free",
   "private": true,
   "version": "1.0.5",
+  "proxy": "http://127.0.0.1:8000",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "apexcharts": "^3.41.0",
+    "axios": "^1.7.2",
     "headlessui": "^0.0.0",
     "jsvectormap": "^1.5.3",
     "match-sorter": "^6.3.1",
