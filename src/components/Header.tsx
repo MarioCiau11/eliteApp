@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import Logo from '../images/logo/logo-icon.svg';
 import DarkModeSwitcher from './DarkModeSwitcher';
 import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
+import { LogoSmall } from '../common/Logo/LogoSmall';
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
@@ -57,7 +57,7 @@ const Header = (props: {
           {/* <!-- Hamburger Toggle BTN --> */}
 
           <Link className="block flex-shrink-0 lg:hidden" to="/">
-            <img src={Logo} alt="Logo" />
+            <LogoSmall />
           </Link>
         </div>
 
