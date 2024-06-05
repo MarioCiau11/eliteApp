@@ -3,10 +3,14 @@ import Logo from '../../common/Logo';
 import { Image01 } from '../../common/Logo/Image01';
 import axios from 'axios';
 import { useState } from 'react';
+import { baseURL } from '../../config/config';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // ignore this line
+
 
   const handleSignIn = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -14,7 +18,7 @@ const SignIn = () => {
     console.log('Email:', email);
     
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/auth/login', {
+      const response = await axios.post(baseURL+'/auth/login', {
         email: email,
         password: password
       });
