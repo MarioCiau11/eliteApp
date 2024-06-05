@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate, useLocation  } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 import ECommerce from './pages/Dashboard/ECommerce';
@@ -14,6 +14,7 @@ function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Function to check if the token is still valid
   const checkTokenValidity = () => {
@@ -50,9 +51,11 @@ function App() {
 
   useEffect(() => {
     if (!isAuthenticated && !loading) {
-      navigate('/auth/signin');
+      if (location.pathname !== '/auth/signup') {
+        navigate('/auth/signin');
+      }
     }
-  }, [isAuthenticated, loading, navigate]);
+  }, [isAuthenticated, loading, navigate, location.pathname]);
 
   if (loading) {
     return <Loader />;
