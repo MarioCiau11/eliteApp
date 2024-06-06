@@ -8,6 +8,8 @@ import { MdDragIndicator } from 'react-icons/md';
 import { IoIosArrowDown } from 'react-icons/io';
 import { MdOutlineSettingsApplications } from 'react-icons/md';
 import { MdOutlineDisplaySettings } from 'react-icons/md';
+import { GoTools } from "react-icons/go";
+import { SlDocs } from "react-icons/sl";
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
@@ -25,7 +27,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true',
   );
 
-  const config = ['Mínimos y máximos', 'Cambio de Folio'];
+  const config = [
+    'Cambio de Folio',
+    'Helpdesk',
+    'Mínimos y máximos',
+    'Solicitudes de mantenimiento PC',
+    'Solicitudes de mantenimiento',
+  ];
   const catalogos = [
     'Almacenes',
     'Almacenista',
@@ -53,6 +61,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     'Pedidos de Sucursales',
     'Pedidos de traspasos',
     'Pedidos privados',
+  ];
+  const herramientas = [
+    'Compras y Cuentas por pagar',
+  ];
+  const reportes = [
+    'Reportes',
+    'Reporte antibióticos',
   ];
 
   // close on click outside
@@ -114,7 +129,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         </button>
       </div>
       {/* <!-- SIDEBAR HEADER --> */}
-
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
@@ -123,7 +137,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
               MENU
             </h3>
-
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Menu Item Dashboard --> */}
               <SidebarLinkGroup
@@ -296,18 +309,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               </NavLink>
                             </li>
                           ))}
-
-                          <li>
-                            <NavLink
-                              to="/forms/form-elements"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Productos
-                            </NavLink>
-                          </li>
                         </ul>
                       </div>
                       {/* <!-- Dropdown Menu End --> */}
@@ -369,18 +370,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               </NavLink>
                             </li>
                           ))}
-
-                          <li>
-                            <NavLink
-                              to="/forms/form-elements"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Productos
-                            </NavLink>
-                          </li>
                         </ul>
                       </div>
                       {/* <!-- Dropdown Menu End --> */}
@@ -388,7 +377,129 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   );
                 }}
               </SidebarLinkGroup>
-              {/* <!-- Menu Item Catalogos --> */}
+              {/* <!-- Menu Item Procesos --> */}
+               {/* <!-- Menu Item Herramientas --> */}
+               <SidebarLinkGroup
+                activeCondition={
+                  pathname === '/forms' || pathname.includes('forms')
+                }
+              >
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <NavLink
+                        to="#"
+                        className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                          (pathname === '/forms' ||
+                            pathname.includes('forms')) &&
+                          'bg-graydark dark:bg-meta-4'
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          sidebarExpanded
+                            ? handleClick()
+                            : setSidebarExpanded(true);
+                        }}
+                      >
+                       <GoTools />
+                        Herramientas
+                        <IoIosArrowDown
+                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
+                            open && 'rotate-180'
+                          }`}
+                        />
+                      </NavLink>
+                      {/* <!-- Dropdown Menu Start --> */}
+                      <div
+                        className={`translate transform overflow-hidden ${
+                          !open && 'hidden'
+                        }`}
+                      >
+                        <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                          {herramientas.map((herramienta, index) => (
+                            <li key={index}>
+                              <NavLink
+                                to={`/forms/${herramienta
+                                  .toLowerCase()
+                                  .replace(/\s+/g, '-')}`}
+                                className={({ isActive }) =>
+                                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                  (isActive && '!text-white')
+                                }
+                              >
+                                {herramienta}
+                              </NavLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {/* <!-- Dropdown Menu End --> */}
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              {/* <!-- Menu Item Herramientas --> */}
+               {/* <!-- Menu Item Reportes --> */}
+               <SidebarLinkGroup
+                activeCondition={
+                  pathname === '/forms' || pathname.includes('forms')
+                }
+              >
+                {(handleClick, open) => {
+                  return (
+                    <React.Fragment>
+                      <NavLink
+                        to="#"
+                        className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                          (pathname === '/forms' ||
+                            pathname.includes('forms')) &&
+                          'bg-graydark dark:bg-meta-4'
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          sidebarExpanded
+                            ? handleClick()
+                            : setSidebarExpanded(true);
+                        }}
+                      >
+                        <SlDocs />
+                        Reportes
+                        <IoIosArrowDown
+                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
+                            open && 'rotate-180'
+                          }`}
+                        />
+                      </NavLink>
+                      {/* <!-- Dropdown Menu Start --> */}
+                      <div
+                        className={`translate transform overflow-hidden ${
+                          !open && 'hidden'
+                        }`}
+                      >
+                        <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                          {reportes.map((reporte, index) => (
+                            <li key={index}>
+                              <NavLink
+                                to={`/forms/${reporte
+                                  .toLowerCase()
+                                  .replace(/\s+/g, '-')}`}
+                                className={({ isActive }) =>
+                                  'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                  (isActive && '!text-white')
+                                }
+                              >
+                                {reporte}
+                              </NavLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {/* <!-- Dropdown Menu End --> */}
+                    </React.Fragment>
+                  );
+                }}
+              </SidebarLinkGroup>
+              {/* <!-- Menu Item Reportes --> */}
               {/* <!-- Menu Item Profile --> */}
               <li>
                 <NavLink
